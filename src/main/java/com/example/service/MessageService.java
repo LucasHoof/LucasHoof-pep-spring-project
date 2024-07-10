@@ -49,14 +49,16 @@ public class MessageService {
     }
 
     public boolean updateMessage(String update, int messageId){
-        Message original = getMessage(messageId);
-        if(original != null){
-            original.setMessageText(update);
-            repository.save(original);
-            return true;
+        if(update != "" && update.length() < 255){
+            Message original = getMessage(messageId);
+            if(original != null){
+                original.setMessageText(update);
+                repository.save(original);
+                return true;
+            }
+            return false;
         }
         return false;
     }
-
 
 }

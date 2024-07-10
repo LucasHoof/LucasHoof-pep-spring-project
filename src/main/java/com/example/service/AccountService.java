@@ -18,13 +18,14 @@ public class AccountService {
 
     public Account userRegistration(Account account){
         if(account.getUsername() != "" && account.getPassword().length() >= 4){
-            Optional<Account> check = repository.findAccountByUsername(account.getUsername());
-            if(check.isEmpty()){
-                return repository.save(account);
-            }
-            return null;
+            return repository.save(account);
         }
         return null;
+    }
+
+    public boolean usernameCheck(Account account){
+        Optional<Account> check = repository.findAccountByUsername(account.getUsername());
+        return check.isEmpty();
     }
 
     public Account login(Account account){
